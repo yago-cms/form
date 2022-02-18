@@ -1,7 +1,6 @@
 {
     "name": "yago-cms/form",
     "description": "This is the description of the package.",
-    "type": "project",
     "homepage": "https://yago.se/",
     "license": "MIT",
     "authors": [
