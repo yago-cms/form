@@ -19,9 +19,7 @@
             "Yago\\Form\\Tests\\": "tests/"
         }
     },
-    "require": {
-        "yago-cms/yago-content": "^3.0"
-    },
+    "require": {},
     "require-dev": {},
     "extra": {
         "laravel": {
