@@ -1,0 +1,34 @@
+{
+    "name": "yago-cms/form",
+    "description": "This is the description of the package.",
+    "type": "project",
+    "homepage": "https://yago.se/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johan Grönberg",
+            "email": "johan@formsmedjan.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Yago\\Form\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yago\\Form\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "yago-cms/yago-content": "^3.0"
+    },
+    "require-dev": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yago\\Form\\PackageServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,22 @@
+extend type Query {
+    form(id: ID @eq): Form @guard @find
+    forms: [Form!]! @guard @all
+}
+
+extend type Mutation {
+    upsertForm(input: UpsertFormInput! @spread): Form! @guard @upsert
+}
+
+type Form {
+    id: ID!
+    name: String!
+    key: String!
+    config: String!
+}
+
+input UpsertFormInput {
+    id: ID
+    name: String!
+    key: String!
+    config: String!
+}
