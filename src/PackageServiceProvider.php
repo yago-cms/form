@@ -25,7 +25,7 @@ class PackageServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
         $this->publishes([
-            __DIR__ . '/../resources/backend/js/' => base_path('backend/src/vendor/yago/form/js'),
+            __DIR__ . '/../resources/backend/js/' => base_path('packages/backend/src/vendor/yago/form/js'),
         ], 'public');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/frontend/views', 'yago-form');
