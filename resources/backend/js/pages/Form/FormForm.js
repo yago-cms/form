@@ -1,7 +1,10 @@
-import _ from "lodash";
+import { Checkbox } from "../../../../../../js/components/Form/Checkbox";
 import { faArrowLeft, faCaretDown, faCaretUp, faTimes } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GET_FORM, GET_FORMS, UPSERT_FORM } from "../../queries";
+import { Input } from "../../../../../../js/components/Form/Input";
+import { Select } from "../../../../../../js/components/Form/Select";
+import { Textarea } from "../../../../../../js/components/Form/Textarea";
 import { useEffect } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import { useMutation, useQuery } from "@apollo/client";
@@ -10,13 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import classNames from "classnames";
-import Error from "../../../../../../../../resources/backend/js/components/Error";
-import { Checkbox } from "../../../../../../../../resources/backend/js/components/Form/Checkbox";
-import { Input } from "../../../../../../../../resources/backend/js/components/Form/Input";
-import { Select } from "../../../../../../../../resources/backend/js/components/Form/Select";
-import { Textarea } from "../../../../../../../../resources/backend/js/components/Form/Textarea";
-import Loading from "../../../../../../../../resources/backend/js/components/Loading";
-import Page from "../../../../../../../../resources/backend/js/components/Page";
+import Error from "../../../../../../js/components/Error";
+import Loading from "../../../../../../js/components/Loading";
+import Page from "../../../../../../js/components/Page";
 
 const schema = yup.object({
   name: yup.string().required(),

@@ -1,11 +1,11 @@
-import { GET_FORMS } from "../../queries";
-import { useQuery } from "@apollo/client";
-import Error from "../../../../../../../../resources/backend/js/components/Error";
-import Loading from "../../../../../../../../resources/backend/js/components/Loading";
-import Page from "../../../../../../../../resources/backend/js/components/Page";
-import Table from "../../../../../../../../resources/backend/js/components/Table";
 import { faEdit, faPlus } from "@fortawesome/pro-duotone-svg-icons";
+import { GET_FORMS } from "../../queries";
 import { useNavigate } from "react-router";
+import { useQuery } from "@apollo/client";
+import Error from "../../../../../../js/components/Error";
+import Loading from "../../../../../../js/components/Loading";
+import Page from "../../../../../../js/components/Page";
+import Table from "../../../../../../js/components/Table";
 
 export default function FormIndex() {
   const getFormsResult = useQuery(GET_FORMS);
