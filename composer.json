@@ -5,7 +5,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Johan Grönberg",
+            "name": "Johan Gr\u00f6nberg",
             "email": "johan@formsmedjan.se"
         }
     ],
@@ -19,13 +19,15 @@
             "Yago\\Form\\Tests\\": "tests/"
         }
     },
-    "require": {},
-    "require-dev": {},
+    "require-dev": {
+        "marcocesarato/php-conventional-changelog": "^1.13"
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Yago\\Form\\PackageServiceProvider"
             ]
         }
-    }
+    },
+    "version": "1.0.4"
 }
