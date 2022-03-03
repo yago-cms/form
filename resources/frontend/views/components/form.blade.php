@@ -1,7 +1,9 @@
-<form action="{{ route('yago.form.store') }}" method="post">
+<form action="{{ route('yago.form.store') }}#form-{{ $form->id }}" method="post" id="form-{{ $form->id }}">
     @csrf
 
     <input type="hidden" name="form_id" value="{{ $form->id }}" />
+
+    <x-core.flash-message context="yago-form" />
 
     @if ($errors->any())
         <div class="alert alert-danger">

@@ -44,6 +44,7 @@ class FormController extends Controller
 
         return back()
             ->with('message', __('Form submitted successfully.'))
-            ->with('message-type', 'info');
+            ->with('message-type', 'info')
+            ->with('message-context', 'yago-form');
     }
 }
