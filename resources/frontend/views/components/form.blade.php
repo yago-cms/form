@@ -5,7 +5,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <?php echo __('Validation failed. One or more field is filled in incorrectly.'); ?>
+            <?php echo __('yago-form::form.validation-error'); ?>
         </div>
     @endif
 
@@ -18,9 +18,8 @@
             @case('text')
                 <div class="mb-3">
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
-                    <input type="text" class="form-control @error($field->name) is-invalid @enderror"
-                        name="{{ $field->name }}" placeholder="{{ $field->placeholder }}" id="{{ $id }}"
-                        value="{{ old($field->name) }}">
+                    <input type="text" class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
+                        placeholder="{{ $field->placeholder }}" id="{{ $id }}" value="{{ old($field->name) }}">
 
                     @error($field->name)
                         <div class="invalid-feedback">
@@ -29,6 +28,7 @@
                     @enderror
                 </div>
             @break
+
             @case('dropdown')
                 <div class="mb-3">
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
@@ -49,9 +49,10 @@
                     @enderror
                 </div>
             @break
+
             @default
         @endswitch
     @endforeach
 
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary">{{ __('yago-form::form.submit') }}</button>
 </form>

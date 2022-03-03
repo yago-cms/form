@@ -35,6 +35,12 @@ class PackageServiceProvider extends ServiceProvider
         ]);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'yago-form');
+
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/yago-form'),
+        ]);
     }
 
     /**

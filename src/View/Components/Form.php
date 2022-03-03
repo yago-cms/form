@@ -6,16 +6,16 @@ use Illuminate\View\Component;
 
 class Form extends Component
 {
-    public $pageBlock;
+    public $block;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($pageBlock)
+    public function __construct($block)
     {
-        $this->pageBlock = $pageBlock;
+        $this->block = $block;
     }
 
     /**
@@ -25,13 +25,13 @@ class Form extends Component
      */
     public function render()
     {
-        $content = json_decode($this->pageBlock['content']);
+        $content = json_decode($this->block['content']);
 
         if (!$content) {
             return;
         }
 
-        $form = $this->pageBlock['data'];
+        $form = $this->block['data'];
         $config = json_decode($form->config);
 
         return view('yago-form::components.form', compact('content', 'form', 'config'));
