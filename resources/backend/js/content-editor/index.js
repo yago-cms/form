@@ -1,5 +1,5 @@
-import { faBook, faColumns, faImage, faText } from "@fortawesome/pro-duotone-svg-icons";
-import FormBlockEditor from "./FormBlockEditor";
+import { faBook } from "@fortawesome/pro-duotone-svg-icons";
+import FormBlockEditor, { FormPreview, FormTitle } from "./FormBlockEditor";
 
 export const contentTypeGroups = [
     {
@@ -11,6 +11,9 @@ export const contentTypeGroups = [
                 icon: faBook,
                 description: 'Intelligo me intelligere.',
                 blockEditor: FormBlockEditor,
+                blockTitle: FormTitle,
+                blockPreview: FormPreview,
+                hidePreviewDetails: true,
             },
         ],
     },

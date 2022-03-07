@@ -13,6 +13,31 @@ const schema = yup.object({
     form: yup.number().required().positive(),
 });
 
+export const FormTitle = ({ content }) => {
+    const { loading: isLoading, error, data } = useQuery(GET_FORMS);
+
+    if (isLoading) return null;
+    if (error) return <Error message={error.message} />
+
+    let formName = 'N/A';
+
+    data.forms.forEach(form => {
+        if (form.id == content.form) {
+            formName = form.name;
+        }
+    });
+
+    return (
+        <div>
+            Form <span className="fw-normal">- {formName}</span>
+        </div>
+    );
+};
+
+export const FormPreview = ({ content, showDetails }) => {
+    return null;
+};
+
 const FormBlockEditor = forwardRef(({ content, save }, ref) => {
     const [cardTemplates, setCardTemplates] = useState([]);
     const {
