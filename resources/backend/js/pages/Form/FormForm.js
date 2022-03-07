@@ -20,6 +20,9 @@ import Page from "../../../../../../js/components/Page";
 const schema = yup.object({
   name: yup.string().required(),
   key: yup.string().required(),
+  settings: yup.object().shape({
+    successMessage: yup.string(),
+  }),
   fields: yup.array().of(
     yup.object().shape({
       type: yup.string().required(),
@@ -378,7 +381,11 @@ export default function FormForm() {
   };
 
   const Footer = () => (
-    <button className="btn btn-primary">Save</button>
+    <div className="d-flex">
+      <div className="ms-auto">
+        <button className="btn btn-outline-primary">Save</button>
+      </div>
+    </div>
   );
 
   const actions = [

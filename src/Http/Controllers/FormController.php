@@ -43,7 +43,7 @@ class FormController extends Controller
         }
 
         return back()
-            ->with('message', __('Form submitted successfully.'))
+            ->with('message', $config->settings->successMessage ? $config->settings->successMessage : __('Form submitted successfully.'))
             ->with('message-type', 'info')
             ->with('message-context', 'yago-form');
     }
