@@ -43,6 +43,10 @@ const fieldTypes = [
     label: 'Text',
   },
   {
+    value: 'textarea',
+    label: 'Textarea',
+  },
+  {
     value: 'checkbox',
     label: 'Checkbox',
   },

@@ -31,6 +31,37 @@
                 </div>
             @break
 
+            @case('textarea')
+                <div class="mb-3">
+                    <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
+                    <textarea class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
+                        placeholder="{{ $field->placeholder }}"
+                        id="{{ $id }}">{{ old($field->name) }}</textarea>
+
+                    @error($field->name)
+                        <div class="invalid-feedback">
+                            {{ Str::replace($field->name, Str::lower($field->label), $message) }}
+                        </div>
+                    @enderror
+                </div>
+            @break
+
+            @case('checkbox')
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input @error($field->name) is-invalid @enderror"
+                            name="{{ $field->name }}" placeholder="{{ $field->placeholder }}" id="{{ $id }}">
+                        <label for="{{ $id }}" class="form-check-label">{{ $field->label }}</label>
+
+                        @error($field->name)
+                            <div class="invalid-feedback">
+                                {{ Str::replace($field->name, Str::lower($field->label), $message) }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+            @break
+
             @case('dropdown')
                 <div class="mb-3">
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
