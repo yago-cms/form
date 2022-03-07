@@ -1,5 +1,5 @@
 import { faBook } from "@fortawesome/pro-duotone-svg-icons";
-import FormBlockEditor, { FormPreview, FormTitle } from "./FormBlockEditor";
+import { FormBlockEditor, FormPreview, FormTitle } from "./Form";
 
 export const contentTypeGroups = [
     {

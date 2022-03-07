@@ -34,14 +34,12 @@ export const FormTitle = ({ content }) => {
     );
 };
 
-export const FormPreview = ({ content, showDetails }) => {
+export const FormPreview = () => {
     return null;
 };
 
-const FormBlockEditor = forwardRef(({ content, save }, ref) => {
-    const [cardTemplates, setCardTemplates] = useState([]);
+export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
     const {
-        control,
         formState: { isDirty, errors },
         handleSubmit,
         register,
@@ -49,7 +47,6 @@ const FormBlockEditor = forwardRef(({ content, save }, ref) => {
     } = useForm({
         resolver: yupResolver(schema),
     });
-    // const formValue = useWatch({ name: 'form', control });
     const [forms, setForms] = useState([]);
     const getFormsResult = useQuery(GET_FORMS);
 
@@ -99,32 +96,13 @@ const FormBlockEditor = forwardRef(({ content, save }, ref) => {
                 return;
             }
 
-            setValue('template', json.template);
-
-            // const cardTemplates = getFormsResult.data.cardTemplates;
-            // cardTemplates.forEach(cardTemplate => {
-            //     if (cardTemplate.id == json.template) {
-            //         const fields = JSON.parse(cardTemplate.config);
-
-            //         fields.forEach(field => {
-            //             setValue(field.id, json[field.id]);
-            //         });
-            //     }
-            // });
+            for (const field in json) {
+                if (field in schema.fields) {
+                    setValue(field, json[field]);
+                }
+            }
         }
     }, [getFormsResult.loading, getFormsResult.data, forms]);
-
-    // useEffect(() => {
-    //     if (formValue > 0) {
-    //         const forms = getFormsResult.data.forms;
-
-    //         forms.forEach(cardTemplate => {
-    //             if (cardTemplate.id == formValue) {
-    //                 setFields(JSON.parse(cardTemplate.config));
-    //             }
-    //         });
-    //     }
-    // }, [formValue]);
 
     if (loading) return <Loading />;
     if (error) return <Error message={error.message} />;
