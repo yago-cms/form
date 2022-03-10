@@ -9,7 +9,6 @@ export const contentTypeGroups = [
                 id: 'form-form',
                 name: 'Form',
                 icon: faBook,
-                description: 'Intelligo me intelligere.',
                 blockEditor: FormBlockEditor,
                 blockTitle: FormTitle,
                 blockPreview: FormPreview,
