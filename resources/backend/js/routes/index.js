@@ -1,5 +1,5 @@
-import FormIndex from '../pages/Form/FormIndex';
-import FormForm from '../pages/Form/FormForm';
+import { FormForm } from '../pages/Form/FormForm';
+import { FormIndex } from '../pages/Form/FormIndex';
 
 export default [
     {

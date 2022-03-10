@@ -1,13 +1,13 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { GET_FORMS } from "../queries";
-import { Select } from "../../../../../js/components/Form/Select";
-import { useForm } from "react-hook-form";
-import { usePrompt } from "../../../../../js/tmp-prompt";
 import { useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import Error from "../../../../../js/components/Error";
-import Loading from "../../../../../js/components/Loading";
+import { Error } from "../../../../../js/components/Error";
+import { Select } from "../../../../../js/components/Form/Select";
+import { Loading } from "../../../../../js/components/Loading";
+import { usePrompt } from "../../../../../js/tmp-prompt";
+import { GET_FORMS } from "../queries";
 
 const schema = yup.object({
     form: yup.number().required().positive(),

@@ -1,21 +1,21 @@
-import { Checkbox } from "../../../../../../js/components/Form/Checkbox";
+import { useMutation, useQuery } from "@apollo/client";
 import { faArrowLeft, faCaretDown, faCaretUp, faTimes } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GET_FORM, GET_FORMS, UPSERT_FORM } from "../../queries";
+import { yupResolver } from "@hookform/resolvers/yup";
+import classNames from "classnames";
+import { useEffect } from "react";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
+import { useNavigate, useParams } from "react-router";
+import { v4 as uuidv4 } from 'uuid';
+import * as yup from "yup";
+import { Error } from "../../../../../../js/components/Error";
+import { Checkbox } from "../../../../../../js/components/Form/Checkbox";
 import { Input } from "../../../../../../js/components/Form/Input";
 import { Select } from "../../../../../../js/components/Form/Select";
 import { Textarea } from "../../../../../../js/components/Form/Textarea";
-import { useEffect } from "react";
-import { useFieldArray, useForm, useWatch } from "react-hook-form";
-import { useMutation, useQuery } from "@apollo/client";
-import { useNavigate, useParams } from "react-router";
-import { v4 as uuidv4 } from 'uuid';
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import classNames from "classnames";
-import Error from "../../../../../../js/components/Error";
-import Loading from "../../../../../../js/components/Loading";
-import Page from "../../../../../../js/components/Page";
+import { Loading } from "../../../../../../js/components/Loading";
+import { Page } from "../../../../../../js/components/Page";
+import { GET_FORM, GET_FORMS, UPSERT_FORM } from "../../queries";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -303,7 +303,7 @@ const Fields = ({ control, errors, register }) => {
   </fieldset>
 };
 
-export default function FormForm() {
+export const FormForm = () => {
   const { id } = useParams();
   const isNew = id === undefined;
   const {
@@ -446,4 +446,4 @@ export default function FormForm() {
       </Page>
     </form>
   );
-}
+};

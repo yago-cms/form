@@ -1,13 +1,13 @@
-import { faEdit, faPlus } from "@fortawesome/pro-duotone-svg-icons";
-import { GET_FORMS } from "../../queries";
-import { useNavigate } from "react-router";
 import { useQuery } from "@apollo/client";
-import Error from "../../../../../../js/components/Error";
-import Loading from "../../../../../../js/components/Loading";
-import Page from "../../../../../../js/components/Page";
-import Table from "../../../../../../js/components/Table";
+import { faEdit, faPlus } from "@fortawesome/pro-duotone-svg-icons";
+import { useNavigate } from "react-router";
+import { Error } from "../../../../../../js/components/Error";
+import { Loading } from "../../../../../../js/components/Loading";
+import { Page } from "../../../../../../js/components/Page";
+import { Table } from "../../../../../../js/components/Table";
+import { GET_FORMS } from "../../queries";
 
-export default function FormIndex() {
+export const FormIndex = () => {
   const getFormsResult = useQuery(GET_FORMS);
   const navigate = useNavigate();
 
@@ -48,4 +48,4 @@ export default function FormIndex() {
       />
     </Page>
   );
-}
+};
