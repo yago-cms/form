@@ -21,7 +21,7 @@
                 <div class="mb-3">
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
                     <input type="text" class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
-                        placeholder="{{ $field->placeholder }}" id="{{ $id }}" value="{{ old($field->name) }}">
+                        @if (isset($field->placeholder)) placeholder="{{ $field->placeholder }}" @endif id="{{ $id }}" value="{{ old($field->name) }}">
 
                     @error($field->name)
                         <div class="invalid-feedback">
@@ -35,7 +35,7 @@
                 <div class="mb-3">
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
                     <textarea class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
-                        placeholder="{{ $field->placeholder }}"
+                        @if (isset($field->placeholder)) placeholder="{{ $field->placeholder }}" @endif
                         id="{{ $id }}">{{ old($field->name) }}</textarea>
 
                     @error($field->name)
@@ -67,7 +67,7 @@
                     <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
                     <select class="form-select @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
                         id="{{ $id }}">
-                        @if ($field->placeholder)
+                        @if (isset($field->placeholder))
                             <option value="">{{ $field->placeholder }}</option>
                         @endif
                         @foreach ($field->fields as $value => $label)
