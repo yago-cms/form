@@ -4,4 +4,4 @@
     @endforeach
 </p>
 
-Submitted by IP: {{ $ip }}
+{{ __('yago-form::form.submitted_by_ip') }}: {{ $ip }}

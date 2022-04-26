@@ -10,6 +10,7 @@ Route::middleware(['web'])->group(function () {
                 ->name('form.')
                 ->group(function () {
                     Route::post('', [FormController::class, 'store'])->name('store');
+                    Route::get('show', [FormController::class, 'show'])->name('show');
                 });
         });
 });

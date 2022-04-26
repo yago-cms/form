@@ -1,14 +1,14 @@
 {
     "name": "yago-cms/form",
-    "description": "This is the description of the package.",
-    "homepage": "https://yago.se/",
-    "license": "MIT",
     "authors": [
         {
-            "name": "Johan Gr\u00f6nberg",
+            "name": "Johan Grönberg",
             "email": "johan@formsmedjan.se"
         }
     ],
+    "require": {
+        "pixelfear/composer-dist-plugin": "^0.1.5"
+    },
     "autoload": {
         "psr-4": {
             "Yago\\Form\\": "src/"
@@ -19,15 +19,20 @@
             "Yago\\Form\\Tests\\": "tests/"
         }
     },
-    "require-dev": {
-        "marcocesarato/php-conventional-changelog": "^1.13"
-    },
     "extra": {
+        "yago": {
+            "name": "form"
+        },
+        "download-dist": [
+            {
+                "url": "https://github.com/yago-cms/form/releases/download/{$version}/dist.tar.gz",
+                "path": "resources/dist"
+            }
+        ],
         "laravel": {
             "providers": [
-                "Yago\\Form\\PackageServiceProvider"
+                "Yago\\Form\\Providers\\FormServiceProvider"
             ]
         }
-    },
-    "version": "1.0.9"
+    }
 }

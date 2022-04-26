@@ -7,8 +7,10 @@ extend type Mutation {
     upsertForm(input: UpsertFormInput! @spread): Form! @guard @upsert
 }
 
+# Form
 type Form {
     id: ID!
+
     name: String!
     key: String!
     config: String!
@@ -16,6 +18,7 @@ type Form {
 
 input UpsertFormInput {
     id: ID
+
     name: String!
     key: String!
     config: String!

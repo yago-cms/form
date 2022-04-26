@@ -3,7 +3,7 @@
 
     <input type="hidden" name="form_id" value="{{ $form->id }}" />
 
-    <x-core.flash-message context="yago-form" />
+    <x-yago-cms::core.flash-message context="yago-form" />
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    @foreach ($config->fields as $field)
+    @foreach ($formConfig->fields as $field)
         @php
             $id = Str::uuid();
         @endphp
@@ -50,7 +50,7 @@
                 <div class="mb-3">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input @error($field->name) is-invalid @enderror"
-                            name="{{ $field->name }}" placeholder="{{ $field->placeholder }}" id="{{ $id }}">
+                            name="{{ $field->name }}" id="{{ $id }}">
                         <label for="{{ $id }}" class="form-check-label">{{ $field->label }}</label>
 
                         @error($field->name)

@@ -1,0 +1,19 @@
+{
+    "name": "@yago/form",
+    "private": true,
+    "main": "resources/js/app.js",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "webpack --config webpack.dev.js",
+        "watch": "webpack --watch --config webpack.dev.js",
+        "prod": "npm run production",
+        "production": "webpack --config webpack.prod.js"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "babel-loader": "^8.2.4",
+        "react": "^17.0.2"
+    }
+}

@@ -1,16 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { Error } from "../../../../../js/components/Error";
-import { Select } from "../../../../../js/components/Form/Select";
-import { Loading } from "../../../../../js/components/Loading";
-import { usePrompt } from "../../../../../js/tmp-prompt";
+import { Error, Loading, Select, usePrompt } from "../../../../cms/resources/js/module";
 import { GET_FORMS } from "../queries";
 
 const schema = yup.object({
-    form: yup.number().required().positive(),
+    form: yup.string().required(),
 });
 
 export const FormTitle = ({ content }) => {
@@ -28,26 +25,22 @@ export const FormTitle = ({ content }) => {
     });
 
     return (
-        <div>
-            Form <span className="fw-normal">- {formName}</span>
-        </div>
+        <>
+            Form - {formName}
+        </>
     );
 };
 
-export const FormPreview = () => {
-    return null;
-};
-
 export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
-    const {
-        formState: { isDirty, errors },
-        handleSubmit,
-        register,
-        setValue,
-    } = useForm({
-        resolver: yupResolver(schema),
-    });
     const [forms, setForms] = useState([]);
+
+    const methods = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: {
+            form: ''
+        }
+    });
+
     const getFormsResult = useQuery(GET_FORMS);
 
     const handleSave = (data) => {
@@ -60,11 +53,11 @@ export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
 
     useImperativeHandle(ref, () => ({
         save() {
-            return handleSubmit(handleSave, handleError)();
+            return methods.handleSubmit(handleSave, handleError)();
         }
     }));
 
-    usePrompt('Are you sure you want to leave this page? You will lose any unsaved data.', isDirty);
+    usePrompt('Are you sure you want to leave this page? You will lose any unsaved data.', methods.isDirty);
 
     const loading = getFormsResult.loading;
     const error = getFormsResult.error;
@@ -72,11 +65,12 @@ export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
     useEffect(() => {
         if (getFormsResult.loading === false && getFormsResult.data) {
             let forms = getFormsResult.data.forms;
+
             forms = forms.map(cardTemplate => ({
                 value: cardTemplate.id,
                 label: cardTemplate.name,
             }));
-            forms.unshift({ value: 0, label: 'Choose form...' });
+
             setForms(forms);
         }
     }, [getFormsResult.loading, getFormsResult.data]);
@@ -98,7 +92,7 @@ export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
 
             for (const field in json) {
                 if (field in schema.fields) {
-                    setValue(field, json[field]);
+                    methods.setValue(field, json[field]);
                 }
             }
         }
@@ -108,15 +102,12 @@ export const FormBlockEditor = forwardRef(({ content, save }, ref) => {
     if (error) return <Error message={error.message} />;
 
     return (
-        <div>
+        <FormProvider {...methods}>
             <Select
                 label="Form"
+                name="form"
                 options={forms}
-                errors={errors}
-                {...register('form')}
             />
-        </div>
+        </FormProvider>
     );
 });
-
-export default FormBlockEditor;
