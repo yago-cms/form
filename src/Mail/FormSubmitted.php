@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Yago\Form\Models\Form;
 use Yago\Form\Models\FormSubmission;
 
 class FormSubmitted extends Mailable
@@ -13,15 +14,17 @@ class FormSubmitted extends Mailable
     use Queueable, SerializesModels;
 
     protected $formSubmission;
+    protected $form;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(FormSubmission $formSubmission)
+    public function __construct(FormSubmission $formSubmission, Form $form)
     {
         $this->formSubmission = $formSubmission;
+        $this->form = $form;
     }
 
     /**
@@ -34,7 +37,7 @@ class FormSubmitted extends Mailable
         $data = json_decode($this->formSubmission->data);
         $config = json_decode($this->formSubmission->config);
 
-        // dd($data, $config);
+        $formConfig = json_decode($this->form->config);
         $formData = [];
 
         $fields = [];
@@ -56,7 +59,13 @@ class FormSubmitted extends Mailable
             ];
         }
 
-        return $this->view('yago-form::emails.submitted')
+        $view = $this->view('yago-form::emails.submitted');
+
+        if (isset($formConfig->settings->subject)) {
+            $view->subject($formConfig->settings->subject);
+        }
+
+        return $view
             ->with([
                 'data' => $formData,
                 'ip' => $this->formSubmission->ip,

@@ -14,12 +14,18 @@
     @foreach ($formConfig->fields as $field)
         @php
             $id = Str::uuid();
+
+            $label = $field->label;
+
+            if ($field->required === true) {
+                $label .= '*';
+            }
         @endphp
 
         @switch($field->type)
             @case('text')
                 <div class="mb-3">
-                    <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
+                    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
                     <input type="text" class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
                         @if (isset($field->placeholder)) placeholder="{{ $field->placeholder }}" @endif id="{{ $id }}" value="{{ old($field->name) }}">
 
@@ -33,7 +39,7 @@
 
             @case('textarea')
                 <div class="mb-3">
-                    <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
+                    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
                     <textarea class="form-control @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
                         @if (isset($field->placeholder)) placeholder="{{ $field->placeholder }}" @endif
                         id="{{ $id }}">{{ old($field->name) }}</textarea>
@@ -51,7 +57,7 @@
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input @error($field->name) is-invalid @enderror"
                             name="{{ $field->name }}" id="{{ $id }}">
-                        <label for="{{ $id }}" class="form-check-label">{{ $field->label }}</label>
+                        <label for="{{ $id }}" class="form-check-label">{{ $label }}</label>
 
                         @error($field->name)
                             <div class="invalid-feedback">
@@ -64,7 +70,7 @@
 
             @case('dropdown')
                 <div class="mb-3">
-                    <label for="{{ $id }}" class="form-label">{{ $field->label }}</label>
+                    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
                     <select class="form-select @error($field->name) is-invalid @enderror" name="{{ $field->name }}"
                         id="{{ $id }}">
                         @if (isset($field->placeholder))

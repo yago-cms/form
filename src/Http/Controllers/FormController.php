@@ -48,7 +48,7 @@ class FormController extends Controller
 
         if ($config->settings->sendEmail === true) {
             foreach ($config->recipents as $recipent) {
-                Mail::to($recipent->email)->send(new FormSubmitted($formSubmission));
+                Mail::to($recipent->email)->send(new FormSubmitted($formSubmission, $form));
             }
         }
 
