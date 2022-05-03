@@ -3,18 +3,25 @@ import { faEdit, faPlus } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Error, Loading, Page, PageContent } from "../../../../../cms/resources/js/module";
 import { GET_FORMS } from "../../queries";
 
 export const FormIndex = () => {
-  const getFormsResult = useQuery(GET_FORMS);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const getFormsResult = useQuery(GET_FORMS, {
+    variables: {
+      page: 1,
+    }
+  });
   const navigate = useNavigate();
 
-  const loading = getFormsResult.loading;
+  const isLoading = getFormsResult.loading;
   const error = getFormsResult.error;
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
   if (error) return <Error message={error.message} />;
 
   const columns = [
@@ -35,7 +42,7 @@ export const FormIndex = () => {
     }
   ];
 
-  const rows = getFormsResult.data.forms.map((form) => ({
+  const rows = getFormsResult.data.forms.data.map((form) => ({
     id: form.id,
     name: form.name,
   }));
@@ -53,6 +60,19 @@ export const FormIndex = () => {
           <DataGrid
             columns={columns}
             rows={rows}
+            paginationMode="server"
+            rowCount={getFormsResult.data.forms.paginatorInfo.total}
+            rowsPerPageOptions={[25]}
+            pageSize={25}
+            onPageChange={(page) => {
+              setIsLoadingMore(true);
+              getFormsResult.fetchMore({
+                variables: {
+                  page: page + 1,
+                }
+              }).then(() => setIsLoadingMore(false))
+            }}
+            loading={isLoadingMore}
             disableColumnMenu
             disableColumnFilter
             disableColumnSelector
