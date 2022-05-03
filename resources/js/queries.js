@@ -2,8 +2,20 @@ import { gql } from "@apollo/client";
 
 // Form
 export const GET_FORMS = gql`
-    query GetForms($page: Int!) {
-        forms(first: 25, page: $page) @connection(key: "form") {
+    query GetForms {
+        forms {
+            id
+
+            name
+            key
+            config
+        }
+    }
+`;
+
+export const GET_FORMS_PAGINATED = gql`
+    query GetFormsPaginated($page: Int!) {
+        formsPaginated(first: 25, page: $page) @connection(key: "form") {
             data {
                 id
 

@@ -1,6 +1,7 @@
 extend type Query {
     form(id: ID @eq): Form @guard @find
-    forms: [Form!]! @guard @paginate
+    forms: [Form!]! @guard @all
+    formsPaginated: [Form!]! @guard @paginate
 }
 
 extend type Mutation {

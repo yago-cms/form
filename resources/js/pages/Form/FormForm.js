@@ -6,7 +6,7 @@ import { FormProvider, useFieldArray, useForm, useFormContext } from "react-hook
 import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import { Checkbox, Error, FieldActions, Input, Loading, Page, PageCard, PageContent, Select, Textarea } from "../../../../../cms/resources/js/module";
-import { GET_FORM, GET_FORMS, UPSERT_FORM } from "../../queries";
+import { GET_FORM, GET_FORMS_PAGINATED, UPSERT_FORM } from "../../queries";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -231,32 +231,12 @@ export const FormForm = () => {
     onCompleted: (data) => {
       navigate(`/forms/${data.upsertForm.id}`);
     },
-    update: (cache, { data: { upsertForm } }) => {
-      const data = cache.readQuery({
-        query: GET_FORMS
-      });
-
-      if (data !== null) {
-        const forms = _.cloneDeep(data.forms);
-
-        if (isNew) {
-          forms.push(upsertForm);
-        } else {
-          forms.forEach(form => {
-            if (form.id === upsertForm.id) {
-              form = upsertForm;
-            }
-          });
-        }
-
-        cache.writeQuery({
-          query: GET_FORMS,
-          data: {
-            forms
-          },
-        });
+    refetchQueries: () => [{
+      query: GET_FORMS_PAGINATED,
+      variables: {
+        page: 1,
       }
-    },
+    }]
   });
 
   const handleSave = (data) => {

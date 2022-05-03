@@ -6,12 +6,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Error, Loading, Page, PageContent } from "../../../../../cms/resources/js/module";
-import { GET_FORMS } from "../../queries";
+import { GET_FORMS_PAGINATED } from "../../queries";
 
 export const FormIndex = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const getFormsResult = useQuery(GET_FORMS, {
+  const getFormsResult = useQuery(GET_FORMS_PAGINATED, {
     variables: {
       page: 1,
     }
@@ -42,7 +42,7 @@ export const FormIndex = () => {
     }
   ];
 
-  const rows = getFormsResult.data.forms.data.map((form) => ({
+  const rows = getFormsResult.data.formsPaginated.data.map((form) => ({
     id: form.id,
     name: form.name,
   }));
@@ -61,7 +61,7 @@ export const FormIndex = () => {
             columns={columns}
             rows={rows}
             paginationMode="server"
-            rowCount={getFormsResult.data.forms.paginatorInfo.total}
+            rowCount={getFormsResult.data.formsPaginated.paginatorInfo.total}
             rowsPerPageOptions={[25]}
             pageSize={25}
             onPageChange={(page) => {
