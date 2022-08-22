@@ -1,4 +1,4 @@
-<form action="{{ route('yago.form.store') }}#form-{{ $form->id }}" method="post" id="form-{{ $form->id }}">
+<form action="{{ route('yago.form.store', [], false) }}#form-{{ $form->id }}" method="post" id="form-{{ $form->id }}">
     @csrf
 
     <input type="hidden" name="form_id" value="{{ $form->id }}" />
