@@ -54,3 +54,11 @@ export const UPSERT_FORM = gql`
         }
     }
 `;
+
+export const DELETE_FORM = gql`
+    mutation DeleteForm($id: ID!) {
+        deleteForm(id: $id) {
+            id
+        }
+    }
+`;

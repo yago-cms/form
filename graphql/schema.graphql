@@ -6,6 +6,8 @@ extend type Query {
 
 extend type Mutation {
     upsertForm(input: UpsertFormInput! @spread): Form! @guard @upsert
+
+    deleteForm(id: ID!): Form! @delete
 }
 
 # Form
