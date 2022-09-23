@@ -34,6 +34,8 @@ class FormController extends Controller
         foreach ($config->fields as $field) {
             if (isset($field->required) && $field->required === true) {
                 $validation[$field->name] = 'required';
+            } else {
+                $validation[$field->name] = '';
             }
         }
 
